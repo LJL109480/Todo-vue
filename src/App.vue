@@ -3,9 +3,8 @@
       <div class="todo-container">
         <div class="todo-wrap">
           <TodoHeader/>
-          <TodoMain/>
+          <TodoMain :todos="todos"/>
           <TodoFooter/>
-
         </div>
       </div>
     </div>
@@ -15,6 +14,16 @@
   import Footer from './components/Footer.vue';
   import Main from './components/Main.vue'
     export default{
+      //定义数据传递给子组件
+      data(){
+        return{
+            todos:[
+            {title:'吃饭', complete:false},
+            {title:'睡觉', complete:true},
+            {title:'敲代码', complete:false}
+            ]
+        }
+      },
        components:{
          TodoHeader:Header,
          TodoFooter:Footer,
