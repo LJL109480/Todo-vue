@@ -12,16 +12,13 @@
 <script>
   import Header from './components/Header.vue';
   import Footer from './components/Footer.vue';
-  import Main from './components/Main.vue'
+  import Main from './components/Main.vue';
+  import storageUtils from './utils/storageUtils'
     export default{
       //定义数据传递给子组件
       data(){
         return{
-            todos:[
-            {title:'吃饭', complete:false},
-            {title:'睡觉', complete:false},
-            {title:'敲代码', complete:false}
-            ]
+            todos:storageUtils.readTodos()
         }
       },
       //数据定义在哪里，更新数据的方法就相应的在哪个组件
@@ -48,7 +45,17 @@
          TodoHeader:Header,
          TodoFooter:Footer,
          TodoMain:Main
-       }
+       },
+      watch:{
+        todos:{
+          deep:true,
+//          handler:function (value) { //value 是todos最新的值
+            //保存todos的json到localStorage
+//            localStorage.setItem('todos_key', JSON.stringify(value))
+            handler:storageUtils.saveTodos
+
+          }
+        }
     }
 </script>
 <style scoped>
