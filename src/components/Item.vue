@@ -28,7 +28,10 @@
           },
         deleteTo(){
             const {index, deleteTodo, todo} = this;
-            deleteTodo(index, todo)
+            if(confirm(`确定删除${todo}吗？`)){
+              deleteTodo(index)
+            }
+
         }
       }
     }

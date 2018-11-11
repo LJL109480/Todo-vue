@@ -4,7 +4,7 @@
         <div class="todo-wrap">
           <TodoHeader :addTodo="addTodo"/>
           <TodoMain :todos="todos" :deleteTodo="deleteTodo"/>
-          <TodoFooter/>
+          <TodoFooter :todos="todos" :deleteDoneTodo="deleteDoneTodo" :selectAllTodos="selectAllTodos"/>
         </div>
       </div>
     </div>
@@ -19,7 +19,7 @@
         return{
             todos:[
             {title:'吃饭', complete:false},
-            {title:'睡觉', complete:true},
+            {title:'睡觉', complete:false},
             {title:'敲代码', complete:false}
             ]
         }
@@ -30,8 +30,17 @@
         addTodo(todo){
               this.todos.unshift(todo)
           },
+        //删除指定下标的todo
         deleteTodo(index){
             this.todos.splice(index, 1)
+        },
+        //删除已经完成的todo
+        deleteDoneTodo(){
+       this.todos = this.todos.filter(todo=>!todo.complete)
+        },
+        //全选或不选todo
+        selectAllTodos (isCheck) {
+          this.todos.forEach(todo => todo.complete = isCheck)
         }
 
       },
