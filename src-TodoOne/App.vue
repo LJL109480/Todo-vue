@@ -2,8 +2,8 @@
     <div id="app">
       <div class="todo-container">
         <div class="todo-wrap">
-          <TodoHeader @addTodo="addTodo"/>
-          <TodoMain :todos="todos"/>
+          <TodoHeader :addTodo="addTodo"/>
+          <TodoMain :todos="todos" :deleteTodo="deleteTodo"/>
           <TodoFooter :todos="todos" :deleteDoneTodo="deleteDoneTodo" :selectAllTodos="selectAllTodos"/>
         </div>
       </div>
@@ -13,19 +13,13 @@
   import Header from './components/Header.vue';
   import Footer from './components/Footer.vue';
   import Main from './components/Main.vue';
-  import storageUtils from './utils/storageUtils';
-  import PubSub from 'pubsub-js';
+  import storageUtils from './utils/storageUtils'
     export default{
       //定义数据传递给子组件
       data(){
         return{
             todos:storageUtils.readTodos()
         }
-      },
-      mounted(){
-        PubSub.subscribe('deleteTodo', (msg,index)=>{
-          this.deleteTodo(index)
-        })
       },
       //数据定义在哪里，更新数据的方法就相应的在哪个组件
       methods:{

@@ -6,6 +6,12 @@
 <script scoped>
   //接收父组件传递的指定属性，属性名，属性值类型，属性方法
     export default{
+        props:{
+            addTodo:{
+                type:Function,
+                required:true
+            }
+        },
       data(){
         return{
           title:''
@@ -21,13 +27,12 @@
                  const todo = {
                     title,
                    complete:false
-                };
-                //调用addTodo添加方法,自定义事件分发
-                this.$emit('addTodo', todo);
+                }
+                //调用addTodo添加方法
+                this.addTodo(todo);
                 //重置输入框内容为空
               this.title=''
-            },
-
+            }
       }
 
     }

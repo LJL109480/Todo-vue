@@ -8,11 +8,11 @@
       </li>
 </template>
 <script>
-  import PubSub from 'pubsub-js'
     export default{
         //props接收父组件类型的第二中方法,接收指定属性的属性名，属性值类型
         props:{
           todo:Object,
+          deleteTodo:Function,
           index:Number
         },
       data(){
@@ -27,10 +27,11 @@
           this.isShow=isEnter
           },
         deleteTo(){
-            const {index, todo} = this;
+            const {index, deleteTodo, todo} = this;
             if(confirm(`确定删除${todo}吗？`)){
-              PubSub.publish('deleteTodo', index)
+              deleteTodo(index)
             }
+
         }
       }
     }
