@@ -1,18 +1,36 @@
 <template>
-      <li>
+      <li :style="bgColour" @mouseenter="headerEnter(true)" @mouseleave="headerEnter(false)">
         <label>
           <input type="checkbox" v-model="todo.complete"/>
           <span>{{todo.title}}</span>
         </label>
-        <button class="btn btn-danger" style="display:none">删除</button>
+        <button class="btn btn-danger" v-show="isShow" @click="deleteTo">删除</button>
       </li>
 </template>
 <script>
     export default{
-        //props接收父组件类型的第二中方法
+        //props接收父组件类型的第二中方法,接收指定属性的属性名，属性值类型
         props:{
-            todo:Object
+          todo:Object,
+          deleteTodo:Function,
+          index:Number
+        },
+      data(){
+            return{
+              bgColour:'Whiter',
+              isShow:false
+            }
+      },
+      methods:{
+        headerEnter(isEnter){
+          this.bgColour=isEnter?"#ccc":"whiter";
+          this.isShow=isEnter
+          },
+        deleteTo(){
+            const {index, deleteTodo, todo} = this;
+            deleteTodo(index, todo)
         }
+      }
     }
 </script>
 <style scoped>
@@ -39,7 +57,6 @@
 
   li button {
     float: right;
-    display: none;
     margin-top: 3px;
   }
 

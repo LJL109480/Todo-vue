@@ -2,8 +2,8 @@
     <div id="app">
       <div class="todo-container">
         <div class="todo-wrap">
-          <TodoHeader/>
-          <TodoMain :todos="todos"/>
+          <TodoHeader :addTodo="addTodo"/>
+          <TodoMain :todos="todos" :deleteTodo="deleteTodo"/>
           <TodoFooter/>
         </div>
       </div>
@@ -23,6 +23,17 @@
             {title:'敲代码', complete:false}
             ]
         }
+      },
+      //数据定义在哪里，更新数据的方法就相应的在哪个组件
+      methods:{
+          //添加todo
+        addTodo(todo){
+              this.todos.unshift(todo)
+          },
+        deleteTodo(index){
+            this.todos.splice(index, 1)
+        }
+
       },
        components:{
          TodoHeader:Header,
