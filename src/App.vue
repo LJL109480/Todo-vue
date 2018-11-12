@@ -1,19 +1,20 @@
 <template>
-  <div class="container">
-    <Search/>
-    <UserMain/>
+  <div>
+   <mt-button style="width: 100%" @click="hit" type="primary">提示</mt-button>
   </div>
 </template>
 
 <script>
-  import Search from './components/Search.vue'
-  import Main from './components/Main.vue'
-
+  import { Toast } from 'mint-ui';
   export default {
-    components: {
-      Search,
-      UserMain: Main
-    }
+   methods:{
+     hit(){
+       Toast({
+         message: '操作成功',
+         iconClass: 'icon icon-success'
+       });
+     }
+   }
   }
 </script>
 
